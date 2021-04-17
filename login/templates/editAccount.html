@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/quoteStyle.css' %}">
+    <title>Edit Account</title>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <h2>Welcome, {{request.session.name}}</h2>
+            <h3><a href="/quotes">Back</a></h3>
+            <h3><a href="/logout">Log Out</a></h3>
+        </div>
+        <main>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+            <form action="/myaccount/{{user.id}}" method='POST'>
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="fname" class="control-label">First Name:</label>
+                    <input type="text" name="fname" class="form-control" value="{{user.fname}}">
+                </div>
+                <div class="form-group">
+                    <label for="lname" class="control-label">Last Name:</label>
+                    <input type="text" name="lname" class="form-control" value="{{user.lname}}">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="control-label">Email:</label>
+                    <input type="text" name="email" class="form-control" value="{{user.email}}">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Update</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</body>
+</html>

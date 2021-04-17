@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/quoteStyle.css' %}">
+    <title>User Quotes</title>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <h2>Welcome, {{request.session.name}}</h2>
+            <h3><a href="/quotes">Back</a></h3>
+            <h3><a href="/logout">Log Out</a></h3>
+        </div>
+        <div class="section">
+            <h3>{{user.fname}} {{user.lname}}'s Quotes</h3>
+            {% for quotes in user_quotes %}
+                <p>{{quotes.author}}: {{quotes.content}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

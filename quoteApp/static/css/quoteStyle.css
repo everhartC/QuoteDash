@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    height: 1000px;
+    width: 1200px;
+    outline: dotted red 2px;
+    padding: 5px;
+}
+
+.header {
+    border-bottom: solid black 2px;
+    height: 50px;
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+.header h2{
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    margin-left: 5%;
+}
+
+#container .header h3{
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
+    /* outline: dotted orange 2px; */
+    /* display: inline-block; */
+    margin-left: 10%;
+}
+
+main {
+    width: 50%;
+    /* outline: dotted red 2px; */
+    display: inline-block;
+}
+
+.sidebar {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    width: 30%;
+    margin-left: 15%;
+    margin-right: 0px;
+    margin-top: 20px;
+    /* outline: dotted red 2px; */
+}
+
+main .onequote {
+    outline: solid black 2px;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+main h3{
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.section {
+    padding: 15px;
+}
+
+.section p {
+    margin-top: 10px;
+} 

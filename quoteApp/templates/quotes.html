@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/quoteStyle.css' %}">
+    <title>Quote Dashboard</title>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <h2>Welcome, {{request.session.name}}</h2>
+            <h3><a href="/myaccount/{{user.id}}">Edit My Account</a></h3>
+            <h3><a href="/logout">Log Out</a></h3>
+        </div>
+        <main>
+            <h3>Quotes</h3>
+            {% for quote in all_quotes %}
+                <div class="onequote">
+                    <p>{{quote.author}}: "{{quote.content}}"</p>
+                    <p>Posted by <a href="/user/{{quote.poster.id}}">{{quote.poster.fname}} {{quote.poster.lname}}</a></p>
+                    <p>{{quote.users_who_liked.count}} people like this</p>
+                    {% if user in quote.users_who_liked.all %}
+                        <p>You LIKED this book already</p>
+                    {% else %}
+                        <button><a href="/quotes/like/{{quote.id}}">Like!</a></button>
+                    {% endif %}
+                    {% if quote.poster.id == request.session.user_id %}
+                        <button><a href="/quotes/deleteQuote/{{quote.id}}">Delete</a></button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+        </main>
+
+        <div class="sidebar">
+            {% if messages %}
+            <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+            <h3>Add a Quote!</h3>
+            <form action="/quotes/addQuote" method="post" id="addquote">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="author" class="control-label">Author:</label>
+                    <input type="text" name="author" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="quote" class="control-label">Quote:</label>
+                    <textarea name="quote"  cols="50" rows="5" form="addquote" class="form-control"></textarea>
+                    {% comment %} <input type="textarea" name="quote" class="form-control"> {% endcomment %}
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+            
+        </div>
+
+
+    </div>
+</body>
+</html>
